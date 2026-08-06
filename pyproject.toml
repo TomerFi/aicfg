@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aicfg"
+version = "0.0.4"
+description = "Unified AI assistant configuration management"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Tomer Figenblat", email = "tomer@figenblat.com" }]
+
+[project.scripts]
+aicfg = "aicfg.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["aicfg"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+lint.select = ["E", "F", "I", "W", "UP", "B", "RUF"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.1",
+    "ty>=0.0.66",
+]
