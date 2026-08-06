@@ -8,7 +8,7 @@ updates:
     commit-message:
       prefix: "ci"
     groups:
-      github-actions:
+      gh-actions:
         patterns:
           - "*"
 
@@ -19,6 +19,9 @@ updates:
     commit-message:
       prefix: "build"
       include: "scope"
+    groups:
+      dev-deps:
+        dependency-type: "development"
 
   - package-ecosystem: "pre-commit"
     directory: "/"
@@ -27,6 +30,6 @@ updates:
     commit-message:
       prefix: "ci"
     groups:
-      pre-commit-hooks:
+      pc-hooks:
         patterns:
           - "*"
