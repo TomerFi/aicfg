@@ -24,6 +24,20 @@ See [AGENTS.md](AGENTS.md) for testing and lint commands.
 4. Add tests — at minimum, verify in an e2e test
 5. Run the full test suite: `uv run pytest tests/ e2e/ -v`
 
+## Local Checks
+
+This project uses [prek](https://github.com/j178/prek) (parallel pre-commit) to run lint and format checks automatically before each commit.
+
+```bash
+uv run prek install
+```
+
+This installs the Git hook. After that, checks run automatically on every commit. To run them manually against all files:
+
+```bash
+uv run prek run --all-files
+```
+
 ## Commit Style
 
 - Conventional commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`

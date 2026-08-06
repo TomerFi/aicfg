@@ -85,6 +85,7 @@ my-project/
 - Always use **`uv`** — it handles package management, virtual envs, and running commands. Never use `pip` or `venv` directly.
 - **`pyproject.toml`** is the single source of truth for dependencies, build config, and tool settings.
 - Dev dependencies are managed in `[tool.uv]` / the `dependency-groups` table.
+- This project uses [**prek**](https://github.com/j178/prek) (parallel pre-commit). Install the hook with `uv run prek install`.
 
 ## Testing
 
