@@ -12,7 +12,7 @@ One source of truth per assistant. Pick any as your source.
 
 AI coding assistants each have their own config files — instructions, skills, rules, agents. Managing them across multiple tools means editing the same content in multiple places. `aicfg link` solves this by creating symlinks so all assistants point to a single source.
 
-<video src="screencast.mp4" loop autoplay muted width="600"></video>
+![aicfg screencast](screencast.gif)
 > **Note:** you can pick any of the supported assistants as a source or a target.
 
 ### Supported Assistants
