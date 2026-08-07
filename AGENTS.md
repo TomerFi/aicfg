@@ -30,12 +30,15 @@ e2e/
 ### `link`
 
 ```bash
-aicfg link <source> --to <target> [,<target2>,...] --dry-run --verbose
+aicfg link <source> --to <target> [,<target2>,...] [--dry-run] [--ci] [--verbose]
 ```
 
 - `--dry-run` prints actions without creating symlinks
+- `--ci` exits 1 if any symlinks are created or replaced (for CI/pre-commit hooks)
 - `--verbose` prints informational messages (created dirs, skipped entries)
 - Multiple targets: `--to claude-code,cursor` or `--to claude-code --to cursor`
+
+**Published hook** — this project publishes a pre-commit hook (`id: link`) defined in `.pre-commit-hooks.yaml`. It can be consumed by adding `https://github.com/TomerFi/aicfg` as a remote repo. Under pre-commit, `PRE_COMMIT=1` is set automatically, triggering `--ci` behavior.
 
 **Assistant definitions** — each assistant is configured in `aicfg/config.py` with paths for 4 categories:
 
@@ -45,6 +48,12 @@ aicfg link <source> --to <target> [,<target2>,...] --dry-run --verbose
 - **agents** — directory, each entry symlinked via `_link_dir`
 
 Each category directory is **not** symlinked in its entirety. Instead, `link` creates the target directory if it doesn't exist and symlinks each top-level entry as-is — folders are folder symlinks, files are file symlinks. `link` does not walk into subdirectories, and it never overwrites user content in the target.
+
+**Symlink behavior**:
+
+- If a target symlink doesn't exist → create it
+- If a target symlink already points to the correct source → skip it (print "Already linked:" with `--verbose`)
+- If a target symlink points to a different source → replace it
 
 To add a new assistant, add an `Assistant` entry in the `ASSISTANTS` dict in `aicfg/config.py` and test with `uv run pytest tests/ e2e/`.
 

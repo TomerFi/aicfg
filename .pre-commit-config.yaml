@@ -31,3 +31,4 @@ repos:
     rev: 3aa28ce11a84d747c5695ad10b81945f2400b54f  # frozen: v3.8.0
     hooks:
       - id: editorconfig-checker
+

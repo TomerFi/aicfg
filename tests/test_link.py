@@ -85,6 +85,32 @@ class TestLinkFile:
         assert not same_file.is_symlink()
         assert same_file.read_text() == "content"
 
+    def test_skips_correct_symlink(self, tmp_path: Path) -> None:
+        source = tmp_path / "source.md"
+        source.write_text("hello")
+        target = tmp_path / "target.md"
+        target.symlink_to(source)
+
+        result = _link_file(source, target, False, False)
+
+        assert result == 0
+        assert target.is_symlink()
+        assert target.read_text() == "hello"
+
+    def test_replaces_wrong_symlink(self, tmp_path: Path) -> None:
+        correct = tmp_path / "correct.md"
+        correct.write_text("correct content")
+        wrong = tmp_path / "wrong.md"
+        wrong.write_text("wrong content")
+        target = tmp_path / "target.md"
+        target.symlink_to(wrong)
+
+        result = _link_file(correct, target, False, False)
+
+        assert result == 1
+        assert target.is_symlink()
+        assert target.read_text() == "correct content"
+
 
 class TestLinkDir:
     """Test _link_dir with tmp_path fixtures.
@@ -151,7 +177,7 @@ class TestLinkDir:
     def test_missing_source_creates_no_target(self, tmp_path: Path) -> None:
         target = tmp_path / "target"
 
-        _link_dir(tmp_path / "missing", target, dry_run=False, verbose=False)
+        _link_dir(tmp_path / "missing", target, False, False)
 
         assert not target.exists()
 
@@ -189,3 +215,35 @@ class TestLinkDir:
         assert (target / "skill-a").exists()
         assert not (target / "skill-a").is_symlink()
         assert (target / "skill-a" / "SKILL.md").read_text() == "# skill A"
+
+    def test_skips_correct_symlink_entries(self, tmp_path: Path) -> None:
+        source = tmp_path / "source"
+        source.mkdir()
+        (source / "rule.md").write_text("# rule")
+
+        target = source
+
+        result = _link_dir(source, target, False, False)
+
+        assert result == 0
+        assert (target / "rule.md").exists()
+        assert not (target / "rule.md").is_symlink()
+
+    def test_replaces_wrong_symlink_entries(self, tmp_path: Path) -> None:
+        correct_source = tmp_path / "source"
+        correct_source.mkdir()
+        (correct_source / "rule.md").write_text("# correct")
+
+        wrong_source = tmp_path / "wrong"
+        wrong_source.mkdir()
+        (wrong_source / "rule.md").write_text("# wrong")
+
+        target = tmp_path / "target"
+        target.mkdir()
+        (target / "rule.md").symlink_to(wrong_source / "rule.md")
+
+        result = _link_dir(correct_source, target, False, False)
+
+        assert result == 1
+        assert (target / "rule.md").is_symlink()
+        assert (target / "rule.md").read_text() == "# correct"

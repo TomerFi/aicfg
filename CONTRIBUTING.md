@@ -38,6 +38,10 @@ This installs the Git hook. After that, checks run automatically on every commit
 uv run prek run --all-files
 ```
 
+## Published Hook
+
+This project publishes a pre-commit hook defined in `.pre-commit-hooks.yaml` (`id: link`). To test it during development, it is added to `.pre-commit-config.yaml` under `repo: local`.
+
 ## Commit Style
 
 - Conventional commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`
