@@ -1,5 +1,9 @@
 # aicfg
 
+[![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue)](https://pypi.org/project/aicfg/)
+[![PyPI Version](https://img.shields.io/pypi/v/aicfg)](https://pypi.org/project/aicfg/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Unified AI assistant configuration management.
 
 Currently, aicfg has only one command: `link`.

@@ -35,6 +35,11 @@ def main() -> None:
         help="print what would be done without creating symlinks",
     )
     link_parser.add_argument(
+        "--ci",
+        action="store_true",
+        help="exit 1 if any symlinks were created or replaced",
+    )
+    link_parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
@@ -47,7 +52,13 @@ def main() -> None:
         targets = [t for name in args.to for t in name.split(",")]
         from aicfg.link import link
 
-        link(args.source, targets, dry_run=args.dry_run, verbose=args.verbose)
+        link(
+            args.source,
+            targets,
+            dry_run=args.dry_run,
+            verbose=args.verbose,
+            ci=args.ci,
+        )
 
 
 if __name__ == "__main__":
