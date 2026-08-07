@@ -1,0 +1,128 @@
+---
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "Release title defaults to the semantic version"
+        required: false
+      bump:
+        description: "Bump type (major/minor/patch) defaults to auto"
+        default: "auto"
+        required: true
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+          - auto
+
+concurrency:
+  group: ${{ github.workflow }}-${{github.ref}}
+  cancel-in-progress: false
+
+env:
+  UV_PYTHON: "3.11"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+      id-token: write
+    name: Release
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9  # v9.0.0
+        with:
+          enable-cache: true
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Setup SSH signing
+        run: |
+          mkdir -p "$RUNNER_TEMP"
+          echo "${{ secrets.SIGNING_KEY }}" > "$RUNNER_TEMP/signing_key"
+          chmod 600 "$RUNNER_TEMP/signing_key"
+          git config gpg.format ssh
+          git config user.signingkey "$RUNNER_TEMP/signing_key"
+          git config commit.gpgsign true
+
+      - name: Determine version and create changelog
+        if: ${{ github.event.inputs.bump == 'auto' }}
+        id: bumper
+        uses: tomerfi/version-bumper-action@2d160ea4d1b4e1bc5534c9eece726a1227b19afd  # 2.0.9
+        with:
+          bump: '${{ github.event.inputs.bump }}'
+
+      - name: Set new project version
+        id: uv_new
+        run: |
+          if [ "${{ github.event.inputs.bump }}" == "auto" ];
+          then jq_output=$(uv version --output-format json "${{ steps.bumper.outputs.next }}");
+          else jq_output=$(uv version --output-format json --bump "${{ github.event.inputs.bump }}"); fi
+          echo "version=$(echo "$jq_output" | jq -r '.version')" >> "$GITHUB_OUTPUT"
+
+
+      - name: Commit, tag, and push
+        run: |
+          git add pyproject.toml uv.lock
+          git commit -m "build: bump version to ${{ steps.uv_new.outputs.version }} [skip ci]"
+          git push
+          git tag ${{ steps.uv_new.outputs.version }} -m "${{ steps.uv_new.outputs.version }}"
+          git push origin ${{ steps.uv_new.outputs.version }}
+
+      - name: Build artifact
+        run: |
+          rm -rf ./dist
+          uv build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33  # v1.14.2
+
+      - name: Create a release name
+        id: release_name
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        with:
+          script: |
+            var retval = '${{ steps.uv_new.outputs.version }}'
+            if ('${{ github.event.inputs.title }}') {
+              retval = retval.concat(' - ${{ github.event.inputs.title }}')
+            }
+            core.setOutput('value', retval)
+
+      - name: Create a release
+        id: gh_release
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
+        with:
+          github-token: ${{ secrets.RELEASE_PAT }}
+          script: |
+            const repo_name = context.payload.repository.full_name
+            const response = await github.request('POST /repos/' + repo_name + '/releases', {
+              tag_name: '${{ steps.uv_new.outputs.version }}',
+              name: '${{ steps.release_name.outputs.value }}',
+              generate_release_notes: true
+            })
+            core.setOutput('html_url', response.data.html_url)
+
+      - name: Set development project version
+        id: uv_dev
+        run: |
+          echo "version=$(uv version --output-format json --bump patch --bump dev | jq -r '.version')" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push
+        run: |
+          git add pyproject.toml uv.lock
+          git commit -m "build: bump version to ${{ steps.uv_dev.outputs.version }} [skip ci]"
+          git push
