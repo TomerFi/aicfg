@@ -7,7 +7,7 @@ repos:
       - id: check-builtin-literals
       - id: check-merge-conflict
       - id: detect-private-key
-      #- id: no-commit-to-branch
+      - id: no-commit-to-branch
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -21,3 +21,13 @@ repos:
     rev: a4405bd34b6505ed51226ba2a5b5428625177d6a  # frozen: v0.0.69
     hooks:
       - id: ty
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: 914e7df21a07ef503a81201c76d2b11c789d3fca  # frozen: v1.7.12
+    hooks:
+      - id: actionlint
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3aa28ce11a84d747c5695ad10b81945f2400b54f  # frozen: v3.8.0
+    hooks:
+      - id: editorconfig-checker
