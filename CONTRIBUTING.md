@@ -41,7 +41,6 @@ uv run prek run --all-files
 ## Commit Style
 
 - Conventional commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`
-- GPG sign all commits (`-s` for signoff, plus `--gpg-sign`)
 - One logical change per commit
 
 ## PR Process
