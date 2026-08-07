@@ -1,0 +1,9 @@
+- id: link
+  name: Link AI assistant configuration files
+  description: Create or update symlinks for AI assistant configuration files.
+  entry: aicfg link
+  language: python
+  always_run: true
+  files: ^(CLAUDE\.md|\.cursorrules|AGENTS\.md|(?:\.github|\.claude|\.agents|\.opencode)/)
+  pass_filenames: false
+  minimum_pre_commit_version: '2.5.0'

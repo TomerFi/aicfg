@@ -38,6 +38,8 @@ aicfg link <source> --to <target> [,<target2>,...] [--dry-run] [--ci] [--verbose
 - `--verbose` prints informational messages (created dirs, skipped entries)
 - Multiple targets: `--to claude-code,cursor` or `--to claude-code --to cursor`
 
+**Published hook** — this project publishes a pre-commit hook (`id: link`) defined in `.pre-commit-hooks.yaml`. It can be consumed by adding `https://github.com/TomerFi/aicfg` as a remote repo. Under pre-commit, `PRE_COMMIT=1` is set automatically, triggering `--ci` behavior.
+
 **Assistant definitions** — each assistant is configured in `aicfg/config.py` with paths for 4 categories:
 
 - **instructions** — single file (linked via `_link_file`)

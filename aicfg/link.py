@@ -52,7 +52,7 @@ def link(
                     verbose,
                 )
 
-    if ci and created > 0:
+    if (ci or os.environ.get("PRE_COMMIT") == "1") and created > 0:
         sys.exit(1)
 
 

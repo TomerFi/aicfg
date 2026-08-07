@@ -3,6 +3,7 @@
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue)](https://pypi.org/project/aicfg/)
 [![PyPI Version](https://img.shields.io/pypi/v/aicfg)](https://pypi.org/project/aicfg/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 Unified AI assistant configuration management.
 
@@ -58,6 +59,38 @@ aicfg link agents --to claude-code
 ```
 </details>
 
+### Pre-commit Hook
+
+Add this to your `.pre-commit-config.yaml`:
+
+<!-- editorconfig-checker-disable -->
+```yaml
+- repo: https://github.com/TomerFi/aicfg
+  rev: "0.0.5"
+  hooks:
+    - id: link
+      args: ["cursor", "--to", "claude-code", "opencode"]
+```
+<!-- editorconfig-checker-enable -->
+
+Choose a source from the table above as the first arg and your targets via `--to`.
+
+### CI
+
+Add this to a GitHub Action to fail if symlinks drift:
+
+<!-- editorconfig-checker-disable -->
+```yaml
+- uses: actions/checkout@v7
+
+- uses: astral-sh/setup-uv@v9
+
+- name: Ensure assistants links are up to date
+  run: uvx aicfg link cursor --to claude-code,opencode --ci
+```
+<!-- editorconfig-checker-enable -->
+
+The `--ci` flag exits 1 if any links needs to be created or replaced.
 
 ### How It Works
 
