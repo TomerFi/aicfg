@@ -61,9 +61,3 @@ aicfg link agents --to claude-code
 
 For directories, each file inside the source directory is symlinked individually into the target directory, preserving the directory structure.
 The source file acts as the single source of truth — edit it once and all targets receive your changes immediately.
-
-### Windows Support
-
-Windows requires Developer Mode enabled for symlinks to work.
-
-See [Microsoft docs](https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development).
