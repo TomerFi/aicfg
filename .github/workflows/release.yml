@@ -71,6 +71,8 @@ jobs:
         run: |
           if [ "${{ github.event.inputs.bump }}" == "auto" ];
           then jq_output=$(uv version --output-format json "${{ steps.bumper.outputs.next }}");
+          elif [ "${{ github.event.inputs.bump }}" == "patch" ];
+          then jq_output=$(uv version --output-format json --bump stable);
           else jq_output=$(uv version --output-format json --bump "${{ github.event.inputs.bump }}"); fi
           echo "version=$(echo "$jq_output" | jq -r '.version')" >> "$GITHUB_OUTPUT"
 
