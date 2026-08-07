@@ -76,7 +76,6 @@ jobs:
           else jq_output=$(uv version --output-format json --bump "${{ github.event.inputs.bump }}"); fi
           echo "version=$(echo "$jq_output" | jq -r '.version')" >> "$GITHUB_OUTPUT"
 
-
       - name: Commit, tag, and push
         run: |
           git add pyproject.toml uv.lock

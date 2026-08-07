@@ -12,17 +12,17 @@ aicfg is a tool for unified AI assistant configuration management. Its only comm
 
 ```
 aicfg/
-  cli.py       — CLI entry point, argparse setup
-  config.py    — Assistant definitions (names, paths per category)
-  link.py      — Core link logic (file and directory symlinks)
-  __init__.py  — Package init
+    cli.py       — CLI entry point, argparse setup
+    config.py    — Assistant definitions (names, paths per category)
+    link.py      — Core link logic (file and directory symlinks)
+    __init__.py  — Package init
 tests/
-  test_link.py — Unit tests for link logic
+    test_link.py — Unit tests for link logic
 e2e/
-  conftest.py        — Shared test fixtures and helpers
-  test_happy_path.py — Happy path e2e tests
-  test_errors.py     — Error handling e2e tests
-  test_dry_run.py    — Dry-run mode e2e tests
+    conftest.py        — Shared test fixtures and helpers
+    test_happy_path.py — Happy path e2e tests
+    test_errors.py     — Error handling e2e tests
+    test_dry_run.py    — Dry-run mode e2e tests
 ```
 
 ## Commands
