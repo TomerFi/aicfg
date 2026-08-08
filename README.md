@@ -90,11 +90,11 @@ Add this to a GitHub Action to fail if symlinks drift:
 ```
 <!-- editorconfig-checker-enable -->
 
-The `--ci` flag exits 1 if any links needs to be created or replaced.
+The `--ci` flag will fail the CI if any links need to be created or replaced.
 
 ### How It Works
 
-`aicfg link` creates **relative symlinks** from each target's config files to the source's. For each category (instructions, skills, rules, agents), a symlink is created at the target path pointing back to the source.
+`aicfg link` creates **relative symlinks** between assistants. For instructions, a file symlink is created at the target path pointing back to the source. For directory categories (skills, rules, agents), the target directory is created and each direct entry inside it is symlinked.
 
-For directories, each file inside the source directory is symlinked individually into the target directory, preserving the directory structure.
+For directories, each entry (file or subdirectory) is symlinked as-is into the target directory. Files become file symlinks, directories become directory symlinks — the entries themselves are symlinked, not their individual contents.
 The source file acts as the single source of truth — edit it once and all targets receive your changes immediately.

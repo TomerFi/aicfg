@@ -32,3 +32,8 @@ repos:
     hooks:
       - id: editorconfig-checker
 
+  - repo: https://github.com/TomerFi/aicfg
+    rev: da90b86365d98b99b024ea303030f64914ed95c1
+    hooks:
+      - id: link
+        args: ["agents", "--to", "claude-code"]
