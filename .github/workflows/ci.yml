@@ -36,6 +36,8 @@ jobs:
       - run: uv run --locked ruff format --check .
       - run: uv run --locked ty check .
 
+      - run: uv run --locked aicfg link agents --to claude-code
+
   unit:
     runs-on: ubuntu-latest
     name: Unit tests — Python ${{ matrix.python }}
