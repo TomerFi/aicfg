@@ -90,7 +90,7 @@ Add this to a GitHub Action to fail if symlinks drift:
 ```
 <!-- editorconfig-checker-enable -->
 
-The `--ci` flag will fail the CI if any links needs to be created or replaced.
+The `--ci` flag will fail the CI if any links need to be created or replaced.
 
 ### How It Works
 
