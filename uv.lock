@@ -4,7 +4,7 @@ requires-python = ">=3.11"
 
 [[package]]
 name = "aicfg"
-version = "0.0.7"
+version = "0.0.8.dev1"
 source = { editable = "." }
 
 [package.dev-dependencies]
