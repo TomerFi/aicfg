@@ -1,4 +1,4 @@
-# aicfg
+# AICfg
 
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue)](https://pypi.org/project/aicfg/)
 [![PyPI Version](https://img.shields.io/pypi/v/aicfg)](https://pypi.org/project/aicfg/)
@@ -7,7 +7,7 @@
 
 Unified AI assistant configuration management.
 
-Currently, aicfg has only one command: `link`.
+Currently, AICfg has only one command: _link_.
 
 ## Link Command
 
@@ -91,6 +91,13 @@ Add this to a GitHub Action to fail if symlinks drift:
 <!-- editorconfig-checker-enable -->
 
 The `--ci` flag will fail the CI if any links need to be created or replaced.
+
+**Python projects** — skip `uvx`: add `aicfg` to your project and run `uv` instead of `uvx` to reuse your existing environment:
+
+```bash
+uv add --dev aicfg
+uv run aicfg link cursor --to claude-code --ci
+```
 
 ### How It Works
 
