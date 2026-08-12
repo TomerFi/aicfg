@@ -108,4 +108,11 @@ The source file acts as the single source of truth — edit it once and all targ
 
 ## Troubleshooting
 
-**Symlinks cloned as regular files** — if your git checkout or clone has symlinks as regular files (commands like `ls -l` show regular files instead of `→` links), run `git config core.symlinks true` before cloning or after resetting symlinks with `git checkout -- <path>`.
+**Symlinks cloned as regular files** — if your git checkout has symlinks as regular files instead of `→` links, your git config has `core.symlinks=false`. Fix it with:
+
+```bash
+git config core.symlinks true
+git checkout -- <path>        # e.g. .claude/ .agents/
+```
+
+For future clones, run `git config --global core.symlinks true` beforehand. This is the default behavior for most modern git clients.
