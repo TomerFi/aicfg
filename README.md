@@ -105,3 +105,7 @@ uv run aicfg link cursor --to claude-code --ci
 
 For directories, each entry (file or subdirectory) is symlinked as-is into the target directory. Files become file symlinks, directories become directory symlinks — the entries themselves are symlinked, not their individual contents.
 The source file acts as the single source of truth — edit it once and all targets receive your changes immediately.
+
+## Troubleshooting
+
+**Symlinks cloned as regular files** — if your git checkout or clone has symlinks as regular files (commands like `ls -l` show regular files instead of `→` links), run `git config core.symlinks true` before cloning or after resetting symlinks with `git checkout -- <path>`.
