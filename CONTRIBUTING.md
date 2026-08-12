@@ -26,7 +26,7 @@ See [AGENTS.md](AGENTS.md) for testing and lint commands.
 
 ## Local Checks
 
-This project uses [prek](https://github.com/j178/prek) (parallel pre-commit) to run lint and format checks automatically before each commit.
+This project uses [prek](https://github.com/j178/prek) (pre-commit replacement) to run lint and format checks automatically before each commit.
 
 ```bash
 uv run prek install

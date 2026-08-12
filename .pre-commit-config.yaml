@@ -11,14 +11,14 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 39d9ac5938dadb73df0564a45f163e25ff9fa6e2  # frozen: v0.16.1
+    rev: 7c55798a78262d14b2074abf623d8a992ebb70d4  # frozen: v0.16.2
     hooks:
       - id: ruff-check
-        args: [ --fix ]
+        args: [--fix]
       - id: ruff-format
 
   - repo: https://github.com/astral-sh/ty-pre-commit
-    rev: a4405bd34b6505ed51226ba2a5b5428625177d6a  # frozen: v0.0.69
+    rev: d8494b3a705ddc24569d31316df8fab801c04b77  # frozen: v0.0.70
     hooks:
       - id: ty
 
@@ -28,12 +28,17 @@ repos:
       - id: actionlint
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 3aa28ce11a84d747c5695ad10b81945f2400b54f  # frozen: v3.8.0
+    rev: e8b4e28241a9ae8296ba6e4a491b5da4eda73283  # frozen: 3.11.1
     hooks:
       - id: editorconfig-checker
 
   - repo: https://github.com/TomerFi/aicfg
-    rev: da90b86365d98b99b024ea303030f64914ed95c1
+    rev: 2e26b58b953cb06b64837d5769edde559ba4d91f  # frozen: 0.0.6
     hooks:
       - id: link
         args: ["agents", "--to", "claude-code"]
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 8d582f54b8e4cc5a61a85eeed1f54bbdb1e294fc  # frozen: 0.12.3
+    hooks:
+      - id: uv-lock
