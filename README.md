@@ -7,7 +7,7 @@
 
 Unified AI assistant configuration management.
 
-Currently, AICfg has only one command: _link_.
+Currently, AICfg has only one command: `link`.
 
 ## Link Command
 
