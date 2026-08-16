@@ -14,6 +14,8 @@ cd aicfg
 uv sync
 ```
 
+This project is primarily Python. It also ships an npm wrapper (`npm/`) for Node.js projects — the wrapper is a thin Node.js layer that spawns the Python code. Development happens in Python unless a change is specific to the wrapper.
+
 See [AGENTS.md](AGENTS.md) for testing and lint commands.
 
 ## How to Add Assistants

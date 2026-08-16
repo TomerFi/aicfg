@@ -45,6 +45,13 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Install node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: lts/*
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
@@ -59,7 +66,7 @@ jobs:
           git config user.signingkey "$RUNNER_TEMP/signing_key"
           git config commit.gpgsign true
 
-      - name: Determine version and create changelog
+      - name: Determine version
         if: ${{ github.event.inputs.bump == 'auto' }}
         id: bumper
         uses: tomerfi/version-bumper-action@2d160ea4d1b4e1bc5534c9eece726a1227b19afd  # 2.0.9
@@ -76,13 +83,17 @@ jobs:
           else jq_output=$(uv version --output-format json --bump "${{ github.event.inputs.bump }}"); fi
           echo "version=$(echo "$jq_output" | jq -r '.version')" >> "$GITHUB_OUTPUT"
 
+      - name: Update NPM version
+        working-directory: npm
+        run: npm version ${{ steps.uv_new.outputs.version }} --no-git-tag-version
+
       - name: Update README hook version
         run: |
           sed -i 's/rev: "[^"]*"/rev: "${{ steps.uv_new.outputs.version }}"/' README.md
 
       - name: Commit, tag, and push
         run: |
-          git add pyproject.toml uv.lock README.md
+          git add pyproject.toml uv.lock README.md npm/package.json
           git commit -m "build: bump version to ${{ steps.uv_new.outputs.version }} [skip ci]"
           git push
           git tag ${{ steps.uv_new.outputs.version }} -m "${{ steps.uv_new.outputs.version }}"
@@ -95,6 +106,10 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33  # v1.14.2
+
+      - name: Publish to NPM
+        working-directory: npm
+        run: npm publish --access=public
 
       - name: Create a release name
         id: release_name
