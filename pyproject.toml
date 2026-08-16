@@ -21,6 +21,7 @@ packages = ["aicfg"]
 target-version = "py311"
 line-length = 100
 lint.select = ["E", "F", "I", "W", "UP", "B", "RUF"]
+exclude = ["npm/src/aicfg"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

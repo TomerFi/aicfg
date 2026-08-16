@@ -1,0 +1,41 @@
+{
+  "name": "aicfg",
+  "version": "0.0.7",
+  "description": "Unified AI assistant configuration management — npm wrapper",
+  "homepage": "https://github.com/TomerFi/aicfg",
+  "license": "MIT",
+  "author": {
+    "name": "Tomer Figenblat",
+    "url": "https://github.com/TomerFi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomerFi/aicfg.git"
+  },
+  "bugs":  "https://github.com/TomerFi/aicfg/issues",
+  "keywords": [
+    "ai",
+    "assistant",
+    "symlink",
+    "claude",
+    "cursor",
+    "copilot",
+    "opencode"
+  ],
+  "bin": {
+    "aicfg": "bin/aicfg.js"
+  },
+  "files": [
+    "bin/aicfg.js",
+    "src/aicfg",
+    "README.md"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=20",
+    "npm": ">= 10.0.0"
+  },
+  "scripts": {
+    "prepublishOnly": "rsync -a --exclude=__pycache__ ../aicfg/ src/aicfg/ && rsync -a ../README.md ."
+  }
+}

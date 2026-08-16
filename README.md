@@ -2,10 +2,13 @@
 
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue)](https://pypi.org/project/aicfg/)
 [![PyPI Version](https://img.shields.io/pypi/v/aicfg)](https://pypi.org/project/aicfg/)
+[![npm Version](https://img.shields.io/npm/v/aicfg)](https://www.npmjs.com/package/aicfg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 Unified AI assistant configuration management.
+
+Built in Python, consumable from both Python and Node.js projects.
 
 Currently, AICfg has only one command: `link`.
 
@@ -45,6 +48,8 @@ uvx aicfg link agents --to claude-code,cursor,github-copilot,opencode
 # Verbose output
 uvx aicfg link cursor --to claude-code --verbose
 ```
+
+**npm users** — replace `uvx` with `npx`, or install globally with `npm install -g aicfg`.
 
 <details>
 <summary><b>Install with pip</b></summary>

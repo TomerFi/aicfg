@@ -3,3 +3,6 @@ __pycache__
 .ruff_cache
 .venv
 dist
+npm/src/aicfg
+*.tgz
+npm/README.md

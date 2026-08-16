@@ -32,11 +32,18 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Install node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: lts
+
       - run: uv run --locked ruff check .
       - run: uv run --locked ruff format --check .
       - run: uv run --locked ty check .
 
       - run: uv run --locked aicfg link agents --to claude-code
+
+      - run: npx -y eslint npm
 
   unit:
     runs-on: ubuntu-latest

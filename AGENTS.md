@@ -23,6 +23,10 @@ e2e/
     test_happy_path.py — Happy path e2e tests
     test_errors.py     — Error handling e2e tests
     test_dry_run.py    — Dry-run mode e2e tests
+npm/
+    bin/aicfg.js       — npm CLI entry point (spawns Python with PYTHONPATH)
+    package.json       — npm package config (syncs aicfg/ → npm/src/aicfg/ on publish)
+    src/aicfg/         — synced from ../aicfg/ before each npm publish
 ```
 
 ## Commands
@@ -91,10 +95,17 @@ my-project/
 
 ## Working Environment
 
+- This is primarily a **Python** project. Development is most likely in Python unless changes are needed for the wrapper.
 - Always use **`uv`** — it handles package management, virtual envs, and running commands. Never use `pip` or `venv` directly.
 - **`pyproject.toml`** is the single source of truth for dependencies, build config, and tool settings.
 - Dev dependencies are managed in `[tool.uv]` / the `dependency-groups` table.
 - This project uses [**prek**](https://github.com/j178/prek) (pre-commit replacement). Install the hook with `uv run prek install`.
+
+### npm Wrapper
+
+The npm package (`npm/`) is a thin Node.js wrapper that spawns the Python code. It uses `PYTHONPATH` to import from the synced `npm/src/aicfg/` directory. The wrapper checks that Python 3.11+ is available on PATH before running.
+
+Before publishing to npm, the wrapper's `npm/src/aicfg/` directory is synced from the main `aicfg/` package via the `prepublishOnly` script in `npm/package.json`. Do **not** edit files in `npm/src/aicfg/` directly — they get overwritten. Make changes in `aicfg/` instead.
 
 ## Testing
 
