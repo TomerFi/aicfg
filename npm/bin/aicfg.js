@@ -38,7 +38,11 @@ function findPython() {
     });
   });
 
-  return Promise.all(promises).then((results) => results.find(Boolean));
+  return Promise.all(promises).then((results) =>
+    results.find((result) =>
+      result && satisfies(result.version, 3, 11)
+    ) ?? null
+  );
 }
 
 function parseVersion(output) {

@@ -49,7 +49,7 @@ uvx aicfg link agents --to claude-code,cursor,github-copilot,opencode
 uvx aicfg link cursor --to claude-code --verbose
 ```
 
-**npm users** — replace `uvx` with `npx`, or install globally with `npm install -g aicfg`.
+**npm users** — install Python 3.11+ first, then replace `uvx` with `npx`, or install globally with `npm install -g aicfg`.
 
 <details>
 <summary><b>Install with pip</b></summary>

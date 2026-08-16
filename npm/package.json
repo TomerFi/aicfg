@@ -36,6 +36,6 @@
     "npm": ">= 10.0.0"
   },
   "scripts": {
-    "prepublishOnly": "rsync -a --exclude=__pycache__ ../aicfg/ src/aicfg/ && rsync -a ../README.md ."
+    "prepublishOnly": "rsync -a --delete --exclude=__pycache__ ../aicfg/ src/aicfg/ && rsync -a ../README.md ."
   }
 }
