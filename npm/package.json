@@ -1,6 +1,6 @@
 {
   "name": "aicfg",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Unified AI assistant configuration management — npm wrapper",
   "homepage": "https://github.com/TomerFi/aicfg",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/TomerFi/aicfg.git"
   },
-  "bugs":  "https://github.com/TomerFi/aicfg/issues",
+  "bugs": "https://github.com/TomerFi/aicfg/issues",
   "keywords": [
     "ai",
     "assistant",

@@ -71,7 +71,7 @@ Add this to your `.pre-commit-config.yaml`:
 <!-- editorconfig-checker-disable -->
 ```yaml
 - repo: https://github.com/TomerFi/aicfg
-  rev: "0.0.7"
+  rev: "0.1.0"
   hooks:
     - id: link
       args: ["cursor", "--to", "claude-code", "opencode"]
