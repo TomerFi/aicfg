@@ -44,6 +44,12 @@ uv run prek run --all-files
 
 This project publishes a pre-commit hook defined in `.pre-commit-hooks.yaml` (`id: link`). To test it during development, it is added to `.pre-commit-config.yaml` under `repo: local`.
 
+## GitHub Action
+
+The project publishes a composite GitHub action at `link/action.yml`, consumed as `TomerFi/aicfg/link@<version>`. The root `action.yml` is a stub — it exits with an error so the repo appears in the GitHub Marketplace without anyone accidentally using the stub.
+
+A new command gets its own subdirectory (`<cmd>/action.yml`) and the stub stays unchanged. The CI workflow uses it relatively as `./link`.
+
 ## Commit Style
 
 - Conventional commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`

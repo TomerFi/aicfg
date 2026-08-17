@@ -23,6 +23,8 @@ e2e/
     test_happy_path.py — Happy path e2e tests
     test_errors.py     — Error handling e2e tests
     test_dry_run.py    — Dry-run mode e2e tests
+link/
+    action.yml         — GitHub composite action (invoked as TomerFi/aicfg/link)
 npm/
     bin/aicfg.js       — npm CLI entry point (spawns Python with PYTHONPATH)
     package.json       — npm package config (syncs aicfg/ → npm/src/aicfg/ on publish)
@@ -43,6 +45,8 @@ aicfg link <source> --to <target> [,<target2>,...] [--dry-run] [--ci] [--verbose
 - Multiple targets: `--to claude-code,cursor` or `--to claude-code --to cursor`
 
 **Published hook** — this project publishes a pre-commit hook (`id: link`) defined in `.pre-commit-hooks.yaml`. It can be consumed by adding `https://github.com/TomerFi/aicfg` as a remote repo. Under pre-commit, `PRE_COMMIT=1` is set automatically, triggering `--ci` behavior.
+
+**GitHub Action** — the `link` command is also available as a composite action (`link/action.yml`), consumed as `TomerFi/aicfg/link@<version>`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the action layout.
 
 **Assistant definitions** — each assistant is configured in `aicfg/config.py` with paths for 4 categories:
 
