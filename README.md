@@ -78,7 +78,7 @@ Add this to your `.pre-commit-config.yaml`:
 <!-- editorconfig-checker-disable -->
 ```yaml
 - repo: https://github.com/TomerFi/aicfg
-  rev: "0.1.0"
+  rev: "0.2.0"
   hooks:
     - id: link
       args: ["cursor", "--to", "claude-code", "opencode"]
@@ -94,7 +94,7 @@ Add this to a GitHub Action to fail if symlinks drift:
 <!-- editorconfig-checker-disable -->
 ```yaml
 - name: Ensure assistant files are linked
-  uses: tomerfi/aicfg/link@0.1.0
+  uses: tomerfi/aicfg/link@0.2.0
   with:
     source: agents
     target: claude-code,opencode
