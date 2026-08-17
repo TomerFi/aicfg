@@ -87,9 +87,10 @@ jobs:
         working-directory: npm
         run: npm version ${{ steps.uv_new.outputs.version }} --no-git-tag-version
 
-      - name: Update README hook version
+      - name: Update README versions
         run: |
           sed -i 's/rev: "[^"]*"/rev: "${{ steps.uv_new.outputs.version }}"/' README.md
+          sed -i 's|tomerfi/aicfg/link@[^ "]*|tomerfi/aicfg/link@${{ steps.uv_new.outputs.version }}|' README.md
 
       - name: Commit, tag, and push
         run: |

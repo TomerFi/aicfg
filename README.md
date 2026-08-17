@@ -49,6 +49,13 @@ uvx aicfg link agents --to claude-code,cursor,github-copilot,opencode
 uvx aicfg link cursor --to claude-code --verbose
 ```
 
+**Python projects** — skip `uvx`: add `aicfg` to your project and run `uv` instead of `uvx` to reuse your existing environment:
+
+```bash
+uv add --dev aicfg
+uv run aicfg link cursor --to claude-code
+```
+
 **npm users** — install Python 3.11+ first, then replace `uvx` with `npx`, or install globally with `npm install -g aicfg`.
 
 <details>
@@ -80,29 +87,20 @@ Add this to your `.pre-commit-config.yaml`:
 
 Choose a source from the table above as the first arg and your targets via `--to`.
 
-### CI
+### GitHub Action
 
 Add this to a GitHub Action to fail if symlinks drift:
 
 <!-- editorconfig-checker-disable -->
 ```yaml
-- uses: actions/checkout@v7
-
-- uses: astral-sh/setup-uv@v9
-
-- name: Ensure assistants links are up to date
-  run: uvx aicfg link cursor --to claude-code,opencode --ci
+- name: Ensure assistant files are linked
+  uses: tomerfi/aicfg/link@0.1.0
+  with:
+    source: agents
+    target: claude-code,opencode
+    verbose: true
 ```
 <!-- editorconfig-checker-enable -->
-
-The `--ci` flag will fail the CI if any links need to be created or replaced.
-
-**Python projects** — skip `uvx`: add `aicfg` to your project and run `uv` instead of `uvx` to reuse your existing environment:
-
-```bash
-uv add --dev aicfg
-uv run aicfg link cursor --to claude-code --ci
-```
 
 ### How It Works
 
