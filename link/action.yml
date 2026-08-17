@@ -30,4 +30,4 @@ runs:
         uvx aicfg link "${{ inputs.source }}" \
           --to "${{ inputs.target }}" \
           --ci \
-          ${{ inputs.verbose && '--verbose' || '' }}
+          ${{ inputs.verbose == 'true' && '--verbose' || '' }}

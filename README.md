@@ -53,7 +53,7 @@ uvx aicfg link cursor --to claude-code --verbose
 
 ```bash
 uv add --dev aicfg
-uv run aicfg link cursor --to claude-code --ci
+uv run aicfg link cursor --to claude-code
 ```
 
 **npm users** — install Python 3.11+ first, then replace `uvx` with `npx`, or install globally with `npm install -g aicfg`.
@@ -93,7 +93,7 @@ Add this to a GitHub Action to fail if symlinks drift:
 
 <!-- editorconfig-checker-disable -->
 ```yaml
-- name: Ensure assistants files are linked
+- name: Ensure assistant files are linked
   uses: tomerfi/aicfg/link@0.1.0
   with:
     source: agents
