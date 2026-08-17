@@ -27,7 +27,7 @@ runs:
     - name: Run aicfg link
       shell: bash
       run: |
-        uv run --locked aicfg link "${{ inputs.source }}" \
+        uvx aicfg link "${{ inputs.source }}" \
           --to "${{ inputs.target }}" \
           --ci \
           ${{ inputs.verbose && '--verbose' || '' }}
