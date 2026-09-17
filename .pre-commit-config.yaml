@@ -11,14 +11,14 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 321478e58f4938179c6b86e4ddfa923d1547a49b  # frozen: v0.16.6
+    rev: e8f7d69b957a30acb2c875078d5fd012de24b64c  # frozen: v0.16.7
     hooks:
       - id: ruff-check
         args: [--fix]
       - id: ruff-format
 
   - repo: https://github.com/astral-sh/ty-pre-commit
-    rev: 743d21e292f7a36ed70cc2318aa3c8711b1e0437  # frozen: v0.0.78
+    rev: 166c7027240501d219155fe71ad9817f8d69237b  # frozen: v0.0.80
     hooks:
       - id: ty
 
@@ -39,6 +39,6 @@ repos:
         args: ["agents", "--to", "claude-code"]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 7720020191168f707a43279c65b6bf9cdf7ed04e  # frozen: 0.12.10
+    rev: 4f783b6470be305483837130a5be2e21ed7ff52b  # frozen: 0.12.13
     hooks:
       - id: uv-lock
