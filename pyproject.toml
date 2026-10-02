@@ -28,8 +28,8 @@ testpaths = ["tests"]
 
 [dependency-groups]
 dev = [
-    "prek==0.5.3",
+    "prek==0.5.4",
     "pytest==9.1.1",
-    "ruff==0.16.8",
-    "ty==0.0.82",
+    "ruff==0.16.9",
+    "ty==0.0.84",
 ]
